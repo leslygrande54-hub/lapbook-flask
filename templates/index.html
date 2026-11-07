@@ -3,456 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lapbook Digital - Lesly y Nahomi</title>
+    <title>Lapbook Digital - Lesly Grande y Nahomi Resendiz</title>
     <style>
         * {
-            margin: 0;
-            padding: 0;
+            margin:0;
+            padding:0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
-
-        body {
-            min-height: 100vh;
-            padding: 18px 10px;
-            background:
-                radial-gradient(circle at 10% 10%, #fff8c8 0 8%, transparent 9%),
-                radial-gradient(circle at 90% 18%, #dff3ff 0 9%, transparent 10%),
-                radial-gradient(circle at 15% 85%, #e4ffd6 0 9%, transparent 10%),
-                linear-gradient(135deg, #fff7d7 0%, #e8f4ff 50%, #fce4ff 100%);
-        }
-
-        h1 {
-            text-align: center;
-            color: #6a1b9a;
-            margin-bottom: 8px;
-            font-size: 26px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .subtitulo {
-            text-align: center;
-            color: #8e24aa;
-            font-size: 15px;
-            margin-bottom: 18px;
-        }
-
-        .libro {
-            width: 95%;
-            max-width: 720px;
-            height: 520px;
-            margin: 0 auto;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            position: relative;
-            overflow: hidden;
-            background: white;
-        }
-
-        .pagina {
-            width: 100%;
-            height: 100%;
-            display: none;
-            padding: 24px;
-            position: relative;
-        }
-
-        .pagina.activa {
-            display: block;
-        }
-
-        /* PORTADA */
-        .portada {
-            background:
-                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0 10%, transparent 11%),
-                radial-gradient(circle at 80% 10%, rgba(255,255,255,0.8) 0 10%, transparent 11%),
-                linear-gradient(135deg, #ff9a9e 0%, #fecfef 30%, #fecfef 70%, #ff9a9e 100%);
-            color: #4a148c;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
-        .portada::before {
-            content: "";
-            position: absolute;
-            width: 140%;
-            height: 140%;
-            top: -20%;
-            left: -20%;
-            background-image:
-                radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
-                radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            opacity: 0.6;
-            z-index: 0;
-        }
-
-        .portada * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .etiqueta-superior {
-            background: rgba(255,255,255,0.95);
-            color: #d81b60;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .portada h2 {
-            font-size: 30px;
-            line-height: 1.2;
-            margin-bottom: 12px;
-        }
-
-        .portada p {
-            font-size: 16px;
-            max-width: 460px;
-            line-height: 1.5;
-            margin-bottom: 18px;
-        }
-
-        .firma {
-            background: rgba(255,255,255,0.9);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 15px;
-            color: #6a1b9a;
-            font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .pegatina {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            background: #ffeb3b;
-            color: #7b1fa2;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            transform: rotate(3deg);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        /* PÁGINAS DE CONTENIDO */
-        .contenido {
-            background:
-                linear-gradient(#fefefe, #fff8fc);
-        }
-
-        .contenido::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(#ff80ab, #ea80fc, #82b1ff);
-        }
-
-        .etiqueta-tema {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff80ab, #ea80fc);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 14px;
-        }
-
-        .contenido h3 {
-            color: #6a1b9a;
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .contenido p {
-            color: #424242;
-            line-height: 1.6;
-            margin-bottom: 12px;
-            font-size: 15px;
-        }
-
-        .codigo {
-            background: #1e1e1e;
-            color: #dcdcdc;
-            padding: 12px;
-            border-radius: 10px;
-            font-family: Consolas, monospace;
-            font-size: 13px;
-            line-height: 1.5;
-            overflow-x: auto;
-            margin: 12px 0;
-            border-left: 4px solid #ea80fc;
-        }
-
-        .resaltado {
-            background: #fff59d;
-            color: #5d4037;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .tarjeta-dato {
+        body{
+            min-height:100vh;
             background: #f3e5f5;
-            border-left: 4px solid #7b1fa2;
-            padding: 12px;
-            border-radius: 0 10px 10px 0;
-            margin-top: 12px;
+            padding:20px 10px;
         }
-
-        .numPagina {
-            position: absolute;
-            bottom: 18px;
-            right: 24px;
-            color: #9e9e9e;
-            font-size: 13px;
-            font-weight: bold;
+        h1{
+            text-align:center;
+            color:#7b1fa2;
+            margin-bottom:20px;
         }
-
-        /* BOTONES */
-        .botones {
-            max-width: 720px;
-            margin: 18px auto 0;
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
+        .libro{
+            max-width:900px;
+            margin:0 auto;
+            background:white;
+            border-radius:20px;
+            box-shadow:0 8px 30px rgba(0,0,0,0.2);
         }
-
-        button {
-            flex: 1;
-            padding: 12px 16px;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #7b1fa2, #e040fb);
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(123, 31, 162, 0.3);
-            transition: 0.2s ease;
+        .hoja{
+            display:none;
         }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(123, 31, 162, 0.4);
+        .hoja.activa{
+            display:flex;
         }
-
-        button:disabled {
-            background: #bdbdbd;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        .portada{
+            width:100%;
+            min-height:550px;
+            background:linear-gradient(135deg,#f8bbd0,#e1bee7);
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            padding:30px;
         }
-
-        /* RESPONSIVE */
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 22px;
-            }
-
-            .libro {
-                height: 540px;
-            }
-
-            .pagina {
-                padding: 18px;
-            }
-
-            .portada h2 {
-                font-size: 24px;
-            }
-
-            .botones {
-                flex-direction: column;
-            }
+        .colIzq, .colDer{
+            width:50%;
+            min-height:550px;
+            padding:25px;
+        }
+        .colIzq{
+            border-right:2px dashed #ce93d8;
+        }
+        img{
+            width:100%;
+            max-height:160px;
+            object-fit:cover;
+            border-radius:12px;
+            margin:12px 0;
+        }
+        h2{
+            color:#6a1b9a;
+            margin-bottom:8px;
+        }
+        h3{
+            color:#9c27b0;
+            margin:10px 0 6px 0;
+        }
+        p{
+            color:#424242;
+            line-height:1.6;
+        }
+        .codigo{
+            background:#212121;
+            color:#fff;
+            padding:12px;
+            border-radius:8px;
+            font-family:monospace;
+            font-size:13px;
+            margin:10px 0;
+        }
+        .botonesNavegacion{
+            max-width:900px;
+            margin:20px auto 0;
+            display:flex;
+            justify-content:space-between;
+            gap:15px;
+        }
+        button{
+            flex:1;
+            padding:13px;
+            border:none;
+            border-radius:25px;
+            background:#9c27b0;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+        }
+        button:disabled{
+            background:#bdbdbd;
+            cursor:not-allowed;
         }
     </style>
 </head>
 <body>
-    <h1>📚 LAPBOOK DIGITAL</h1>
-    <p class="subtitulo">Fundamentos del Desarrollo Web</p>
+    <h1>📖 LAPBOOK DIGITAL DESPLEGABLE</h1>
 
     <div class="libro">
-        <!-- PÁGINA 0 PORTADA -->
-        <div class="pagina portada activa" id="pag0">
-            <span class="pegatina">✨ Trabajo Escolar</span>
-            <span class="etiqueta-superior">Desarrollo Web</span>
-            <h2>LAPBOOK DIGITAL</h2>
-            <p>Explora los conceptos básicos de HTML, CSS, JavaScript, SQL y Jinja2.</p>
-            <div class="firma">Hecho por: Lesly Grande y Nahomi Resendiz 🎀</div>
-            <span class="numPagina">Página 0 / 6</span>
+        <!-- HOJA 0: PORTADA -->
+        <div class="hoja portada activa" id="hoja0">
+            <h2>LAPBOOK DE DESARROLLO WEB</h2>
+            <img alt="Desarrollo web" src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=700&q=80">
+            <p>Conceptos completos: HTML • CSS • JavaScript • SQL • Jinja2</p>
+            <br>
+            <p><strong>Hecho por: Lesly Grande y Nahomi Resendiz</strong></p>
+            <p>Presiona Siguiente para abrir el libro por los lados</p>
         </div>
 
-        <!-- PÁGINA 1 HTML -->
-        <div class="pagina contenido" id="pag1">
-            <span class="etiqueta-tema">🌐 HTML</span>
-            <h3>¿Qué es HTML?</h3>
-            <p>HTML es el lenguaje que define la <span class="resaltado">estructura</span> de una página web. Con él creamos encabezados, párrafos, imágenes, enlaces y formularios.</p>
-
-            <div class="codigo">
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;Mi página&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;h1&gt;Hola mundo&lt;/h1&gt;
-    &lt;p&gt;Este es un párrafo&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+        <!-- HOJA 1: IZQ HTML | DER CSS -->
+        <div class="hoja" id="hoja1">
+            <div class="colIzq">
+                <h2>🌐 HTML</h2>
+                <img alt="HTML" src="https://images.unsplash.com/photo-1621839673705-6617ad9203c2?auto=format&fit=crop&w=600&q=80">
+                <h3>Concepto</h3>
+                <p>Es el lenguaje de marcado que construye la estructura de la página web. Crea títulos, párrafos, imágenes, botones y formularios.</p>
+                <h3>Ejemplo</h3>
+                <div class="codigo">
+&lt;h1&gt;Título de mi página&lt;/h1&gt;
+&lt;p&gt;Texto del párrafo&lt;/p&gt;
+                </div>
             </div>
-
-            <div class="tarjeta-dato">
-                <strong>Tip:</strong> HTML solo organiza el contenido; para darle color o diseño necesitamos CSS.
-            </div>
-
-            <span class="numPagina">Página 1 / 6</span>
-        </div>
-
-        <!-- PÁGINA 2 CSS -->
-        <div class="pagina contenido" id="pag2">
-            <span class="etiqueta-tema">🎨 CSS</span>
-            <h3>¿Qué es CSS?</h3>
-            <p>CSS se encarga del <span class="resaltado">diseño y la apariencia</span>. Con él cambiamos colores, fuentes, tamaños, márgenes y posiciones de los elementos.</p>
-
-            <div class="codigo">
-body {
-    background: #fce4ff;
-    font-family: Arial;
-}
-
+            <div class="colDer">
+                <h2>🎨 CSS</h2>
+                <img alt="CSS" src="https://images.unsplash.com/photo-1507721999472-8ed29a166d30?auto=format&fit=crop&w=600&q=80">
+                <h3>Concepto</h3>
+                <p>Se encarga del diseño y la apariencia visual. Modifica colores, fuentes, tamaños, sombras y la posición de todos los elementos HTML.</p>
+                <h3>Ejemplo</h3>
+                <div class="codigo">
 h1 {
-    color: #6a1b9a;
-    font-size: 28px;
+    color:purple;
+    font-size:32px;
 }
+                </div>
             </div>
-
-            <div class="tarjeta-dato">
-                <strong>Tip:</strong> Usa clases para aplicar el mismo estilo a varios elementos sin repetir código.
-            </div>
-
-            <span class="numPagina">Página 2 / 6</span>
         </div>
 
-        <!-- PÁGINA 3 JAVASCRIPT -->
-        <div class="pagina contenido" id="pag3">
-            <span class="etiqueta-tema">⚡ JavaScript</span>
-            <h3>¿Qué es JavaScript?</h3>
-            <p>JavaScript agrega <span class="resaltado">interactividad</span> a la página. Sirve para responder a clics, validar formularios, mostrar mensajes y cambiar contenido dinámicamente.</p>
-
-            <div class="codigo">
-function saludar() {
-    let nombre = prompt("Escribe tu nombre");
-    alert("Hola " + nombre);
+        <!-- HOJA 2: IZQ JAVASCRIPT | DER SQL -->
+        <div class="hoja" id="hoja2">
+            <div class="colIzq">
+                <h2>⚡ JavaScript</h2>
+                <img alt="JavaScript" src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=600&q=80">
+                <h3>Concepto</h3>
+                <p>Lenguaje de programación que agrega interactividad a la página: detecta clics, valida formularios, hace cálculos y cambia contenido en tiempo real.</p>
+                <h3>Ejemplo</h3>
+                <div class="codigo">
+function saludar(){
+    alert("¡Hola usuario!");
 }
-
-document.querySelector("button")
-        .addEventListener("click", saludar);
+                </div>
             </div>
-
-            <div class="tarjeta-dato">
-                <strong>Tip:</strong> JavaScript es el comportamiento de la página; sin él, todo sería más estático.
+            <div class="colDer">
+                <h2>🗄️ SQL</h2>
+                <img alt="SQL base de datos" src="https://images.unsplash.com/photo-1544383482-3be99b922509?auto=format&fit=crop&w=600&q=80">
+                <h3>Concepto</h3>
+                <p>Lenguaje para administrar bases de datos, sirve para guardar, leer, editar y borrar la información de los usuarios del sistema web.</p>
+                <h3>Ejemplo</h3>
+                <div class="codigo">
+SELECT * FROM usuarios;
+                </div>
             </div>
-
-            <span class="numPagina">Página 3 / 6</span>
         </div>
 
-        <!-- PÁGINA 4 SQL -->
-        <div class="pagina contenido" id="pag4">
-            <span class="etiqueta-tema">🗄️ SQL</span>
-            <h3>¿Qué es SQL?</h3>
-            <p>SQL es el lenguaje que usamos para trabajar con <span class="resaltado">bases de datos</span>. Permite guardar, buscar, modificar y eliminar información.</p>
-
-            <div class="codigo">
-CREATE TABLE alumnos (
-    id INT PRIMARY KEY,
-    nombre TEXT,
-    correo TEXT
-);
-
-SELECT * FROM alumnos;
-            </div>
-
-            <div class="tarjeta-dato">
-                <strong>Tip:</strong> En proyectos web, SQL se usa para guardar usuarios, productos, mensajes o registros de una tarea.
-            </div>
-
-            <span class="numPagina">Página 4 / 6</span>
-        </div>
-
-        <!-- PÁGINA 5 JINJA2 -->
-        <div class="pagina contenido" id="pag5">
-            <span class="etiqueta-tema">🧩 Jinja2</span>
-            <h3>¿Qué es Jinja2?</h3>
-            <p>Jinja2 es un motor de plantillas que permite combinar HTML con datos de Python. Se usa mucho con Flask para crear páginas dinámicas.</p>
-
-            <div class="codigo">
-&lt;ul&gt;
-{% for alumno in alumnos %}
-    &lt;li&gt;{{ alumno.nombre }}&lt;/li&gt;
+        <!-- HOJA 3: IZQ JINJA2 | DER RESUMEN -->
+        <div class="hoja" id="hoja3">
+            <div class="colIzq">
+                <h2>🧩 Jinja2 (Flask)</h2>
+                <img alt="Jinja2 Flask" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80">
+                <h3>Concepto</h3>
+                <p>Motor de plantillas que trabaja con Flask, permite meter datos de Python dentro del HTML, usar ciclos y condicionales para páginas dinámicas.</p>
+                <h3>Ejemplo</h3>
+                <div class="codigo">
+{% for nombre in lista %}
+    &lt;p&gt;{{nombre}}&lt;/p&gt;
 {% endfor %}
-&lt;/ul&gt;
-
-{% if usuario %}
-    &lt;p&gt;Bienvenido {{ usuario }}&lt;/p&gt;
-{% endif %}
+                </div>
             </div>
-
-            <div class="tarjeta-dato">
-                <strong>Tip:</strong> Con Jinja2 no tienes que escribir todo el HTML a mano para cada dato que cambie.
+            <div class="colDer">
+                <h2>📋 Resumen General</h2>
+                <img alt="Resumen proyecto web" src="https://images.unsplash.com/photo-1460925895917-afd78d15a83e?auto=format&fit=crop&w=600&q=80">
+                <p><strong>HTML:</strong> Estructura</p>
+                <p><strong>CSS:</strong> Diseño</p>
+                <p><strong>JS:</strong> Interactividad</p>
+                <p><strong>SQL:</strong> Datos / Base de Datos</p>
+                <p><strong>Jinja2:</strong> Plantillas dinámicas en Flask</p>
+                <br>
+                <p>¡Todos funcionan juntos para crear una aplicación web completa!</p>
             </div>
-
-            <span class="numPagina">Página 5 / 6</span>
         </div>
     </div>
 
-    <div class="botones">
-        <button id="btnAtras" onclick="anterior()" disabled>⬅️ Anterior</button>
-        <button id="btnSiguiente" onclick="siguiente()">Siguiente ➡️</button>
+    <div class="botonesNavegacion">
+        <button id="btnAtras">⬅️ Atrás</button>
+        <button id="btnSiguiente">Siguiente ➡️</button>
     </div>
 
     <script>
-        let paginaActual = 0;
-        const totalPaginas = 6;
+        let paginaActual = 0;
+        const totalHojas = 4;
 
-        function mostrarPagina() {
-            for (let i = 0; i < totalPaginas; i++) {
-                document.getElementById("pag" + i).classList.remove("activa");
+        const btnAtras = document.getElementById("btnAtras");
+        const btnSiguiente = document.getElementById("btnSiguiente");
+
+        function refrescarVista(){
+            for(let i=0; i < totalHojas; i++){
+                document.getElementById("hoja"+i).classList.remove("activa");
             }
-            document.getElementById("pag" + paginaActual).classList.add("activa");
-
-            document.getElementById("btnAtras").disabled = paginaActual === 0;
-            document.getElementById("btnSiguiente").disabled = paginaActual === totalPaginas‑1;
+            document.getElementById("hoja"+paginaActual).classList.add("activa");
+            btnAtras.disabled = (paginaActual === 0);
+            btnSiguiente.disabled = (paginaActual === totalHojas - 1);
         }
 
-        function siguiente() {
-            if (paginaActual < totalPaginas‑1) {
+        btnSiguiente.addEventListener("click", function(){
+            if(paginaActual < totalHojas -1){
                 paginaActual++;
-                mostrarPagina();
+                refrescarVista();
             }
-        }
+        })
 
-        function anterior() {
-            if (paginaActual > 0) {
-                paginaActual‑‑;
-                mostrarPagina();
+        btnAtras.addEventListener("click", function(){
+            if(paginaActual > 0){
+                paginaActual--;
+                refrescarVista();
             }
-        }
+        })
+
+        refrescarVista();
     </script>
 </body>
 </html>
+
 
