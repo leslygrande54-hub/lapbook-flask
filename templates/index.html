@@ -1,127 +1,458 @@
 <!DOCTYPE html>
-<html lang="es‑MX">
+<html lang="es-MX">
 <head>
-    <meta charset="UTF‑8">
-    <meta name="viewport" content="width=device‑width, initial‑scale=1.0">
-    <title>Lapbook Interactivo Desarrollo Web</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lapbook Digital - Lesly y Nahomi</title>
     <style>
-        *{box‑sizing:border‑box;font‑family:Arial, sans‑-serif;margin:0;padding:0;}
-        body{background:#FFF8E7;padding:20px;color:#222;}
-        .contenedor{max‑width:900px;margin:0 auto;background:white;padding:25px;border‑radius:16px;box‑shadow:0 4px 12px #00000022;}
-        h1{text‑align:center;color:#9B2335;margin‑bottom:30px;}
-        .seccion{margin:25px 0;padding:20px;border‑left:6px solid #9B2335;background:#fff3f4;border‑radius:8px;}
-        h2{color:#581845;margin‑bottom:12px;}
-        .codigo{background:#222;color:#7DCEA0;padding:12px;border‑radius:6px;margin:10px 0;white‑space:pre‑wrap;}
-        .boton{padding:8px 14px;background:#C70039;color:white;border:none;border‑radius:6px;margin:8px 0;cursor:pointer;}
-        .oculto{display:none;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 18px 10px;
+            background:
+                radial-gradient(circle at 10% 10%, #fff8c8 0 8%, transparent 9%),
+                radial-gradient(circle at 90% 18%, #dff3ff 0 9%, transparent 10%),
+                radial-gradient(circle at 15% 85%, #e4ffd6 0 9%, transparent 10%),
+                linear-gradient(135deg, #fff7d7 0%, #e8f4ff 50%, #fce4ff 100%);
+        }
+
+        h1 {
+            text-align: center;
+            color: #6a1b9a;
+            margin-bottom: 8px;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #8e24aa;
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+
+        .libro {
+            width: 95%;
+            max-width: 720px;
+            height: 520px;
+            margin: 0 auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            background: white;
+        }
+
+        .pagina {
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 24px;
+            position: relative;
+        }
+
+        .pagina.activa {
+            display: block;
+        }
+
+        /* PORTADA */
+        .portada {
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0 10%, transparent 11%),
+                radial-gradient(circle at 80% 10%, rgba(255,255,255,0.8) 0 10%, transparent 11%),
+                linear-gradient(135deg, #ff9a9e 0%, #fecfef 30%, #fecfef 70%, #ff9a9e 100%);
+            color: #4a148c;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .portada::before {
+            content: "";
+            position: absolute;
+            width: 140%;
+            height: 140%;
+            top: -20%;
+            left: -20%;
+            background-image:
+                radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px),
+                radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.6;
+            z-index: 0;
+        }
+
+        .portada * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .etiqueta-superior {
+            background: rgba(255,255,255,0.95);
+            color: #d81b60;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .portada h2 {
+            font-size: 30px;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .portada p {
+            font-size: 16px;
+            max-width: 460px;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .firma {
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            color: #6a1b9a;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .pegatina {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: #ffeb3b;
+            color: #7b1fa2;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            transform: rotate(3deg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* PÁGINAS DE CONTENIDO */
+        .contenido {
+            background:
+                linear-gradient(#fefefe, #fff8fc);
+        }
+
+        .contenido::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(#ff80ab, #ea80fc, #82b1ff);
+        }
+
+        .etiqueta-tema {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff80ab, #ea80fc);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .contenido h3 {
+            color: #6a1b9a;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .contenido p {
+            color: #424242;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .codigo {
+            background: #1e1e1e;
+            color: #dcdcdc;
+            padding: 12px;
+            border-radius: 10px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin: 12px 0;
+            border-left: 4px solid #ea80fc;
+        }
+
+        .resaltado {
+            background: #fff59d;
+            color: #5d4037;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .tarjeta-dato {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+            padding: 12px;
+            border-radius: 0 10px 10px 0;
+            margin-top: 12px;
+        }
+
+        .numPagina {
+            position: absolute;
+            bottom: 18px;
+            right: 24px;
+            color: #9e9e9e;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* BOTONES */
+        .botones {
+            max-width: 720px;
+            margin: 18px auto 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #7b1fa2, #e040fb);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(123, 31, 162, 0.3);
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(123, 31, 162, 0.4);
+        }
+
+        button:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 22px;
+            }
+
+            .libro {
+                height: 540px;
+            }
+
+            .pagina {
+                padding: 18px;
+            }
+
+            .portada h2 {
+                font-size: 24px;
+            }
+
+            .botones {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="contenedor">
-        <h1>📖 LAPBOOK: FUNDAMENTOS DEL DESARROLLO WEB</h1>
+    <h1>📚 LAPBOOK DIGITAL</h1>
+    <p class="subtitulo">Fundamentos del Desarrollo Web</p>
 
-        <!-- SECCIÓN HTML -->
-        <div class="seccion">
-            <h2>🌐 HTML: ESTRUCTURA DE LA PÁGINA</h2>
-            <p><strong>¿Qué es?</strong> Lenguaje de marcado que construye la estructura: textos, imágenes, botones, listas.</p>
-            <button class="boton" onclick="ver('html')">Ver ejemplos de etiquetas</button>
-            <div id="html" class="oculto">
-                <div class="codigo">
-&lt;header&gt; → Encabezado superior de la página
-&lt;nav&gt; → Menú de navegación
-&lt;section&gt; → Bloque de contenido
-&lt;article&gt; → Artículo independiente
-&lt;footer&gt; → Pie de página
-                </div>
-                <p><strong>Ejemplo completo:</strong></p>
-                <div class="codigo">
-&lt;section&gt;
-    &lt;h3&gt;Noticias&lt;/h3&gt;
-    &lt;p&gt;Contenido de la noticia&lt;/p&gt;
-&lt;/section&gt;
-                </div>
-            </div>
+    <div class="libro">
+        <!-- PÁGINA 0 PORTADA -->
+        <div class="pagina portada activa" id="pag0">
+            <span class="pegatina">✨ Trabajo Escolar</span>
+            <span class="etiqueta-superior">Desarrollo Web</span>
+            <h2>LAPBOOK DIGITAL</h2>
+            <p>Explora los conceptos básicos de HTML, CSS, JavaScript, SQL y Jinja2.</p>
+            <div class="firma">Hecho por: Lesly Grande y Nahomi Resendiz 🎀</div>
+            <span class="numPagina">Página 0 / 6</span>
         </div>
 
-        <!-- SECCIÓN CSS -->
-        <div class="seccion">
-            <h2>🎨 CSS: ESTILOS Y DISEÑO</h2>
-            <p><strong>¿Qué es?</strong> Le da apariencia: sombras, bordes redondeados, colores degradados, posicionamiento de los elementos.</p>
-            <button class="boton" onclick="ver('css')">Ver propiedades CSS</button>
-            <div id="css" class="oculto">
-                <div class="codigo">
-box‑shadow: sombra de los elementos
-border‑radius: esquinas redondeadas
-display: flex; → Acomodar elementos en fila
-background: linear‑gradient → Fondo degradado
-text‑decoration → Quitar/subrayar texto
-                </div>
+        <!-- PÁGINA 1 HTML -->
+        <div class="pagina contenido" id="pag1">
+            <span class="etiqueta-tema">🌐 HTML</span>
+            <h3>¿Qué es HTML?</h3>
+            <p>HTML es el lenguaje que define la <span class="resaltado">estructura</span> de una página web. Con él creamos encabezados, párrafos, imágenes, enlaces y formularios.</p>
+
+            <div class="codigo">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Mi página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hola mundo&lt;/h1&gt;
+    &lt;p&gt;Este es un párrafo&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
             </div>
+
+            <div class="tarjeta-dato">
+                <strong>Tip:</strong> HTML solo organiza el contenido; para darle color o diseño necesitamos CSS.
+            </div>
+
+            <span class="numPagina">Página 1 / 6</span>
         </div>
 
-        <!-- SECCIÓN JAVASCRIPT -->
-        <div class="seccion">
-            <h2>⚡ JAVASCRIPT: INTERACTIVIDAD</h2>
-            <p><strong>¿Qué es?</strong> Hace que la página reaccione: cambiar colores, contar, validar formularios, mostrar mensajes personalizados.</p>
-            <button class="boton" onclick="ver('js')">Ver funciones JS</button>
-            <div id="js" class="oculto">
-                <div class="codigo">
-// Contador
-let contador = 0
-function sumar(){
-    contador = contador + 1
-    alert("El número es: "+contador)
+        <!-- PÁGINA 2 CSS -->
+        <div class="pagina contenido" id="pag2">
+            <span class="etiqueta-tema">🎨 CSS</span>
+            <h3>¿Qué es CSS?</h3>
+            <p>CSS se encarga del <span class="resaltado">diseño y la apariencia</span>. Con él cambiamos colores, fuentes, tamaños, márgenes y posiciones de los elementos.</p>
+
+            <div class="codigo">
+body {
+    background: #fce4ff;
+    font-family: Arial;
 }
-                </div>
+
+h1 {
+    color: #6a1b9a;
+    font-size: 28px;
+}
             </div>
+
+            <div class="tarjeta-dato">
+                <strong>Tip:</strong> Usa clases para aplicar el mismo estilo a varios elementos sin repetir código.
+            </div>
+
+            <span class="numPagina">Página 2 / 6</span>
         </div>
 
-        <!-- SECCIÓN SQL -->
-        <div class="seccion">
-            <h2>🗄️ SQL: BASES DE DATOS</h2>
-            <p><strong>¿Qué es?</strong> Guardamos la información de los usuarios, productos, registros para nuestra página web.</p>
-            <button class="boton" onclick="ver('sql')">Ver comandos SQL</button>
-            <div id="sql" class="oculto">
-                <div class="codigo">
-CREATE TABLE productos(
+        <!-- PÁGINA 3 JAVASCRIPT -->
+        <div class="pagina contenido" id="pag3">
+            <span class="etiqueta-tema">⚡ JavaScript</span>
+            <h3>¿Qué es JavaScript?</h3>
+            <p>JavaScript agrega <span class="resaltado">interactividad</span> a la página. Sirve para responder a clics, validar formularios, mostrar mensajes y cambiar contenido dinámicamente.</p>
+
+            <div class="codigo">
+function saludar() {
+    let nombre = prompt("Escribe tu nombre");
+    alert("Hola " + nombre);
+}
+
+document.querySelector("button")
+        .addEventListener("click", saludar);
+            </div>
+
+            <div class="tarjeta-dato">
+                <strong>Tip:</strong> JavaScript es el comportamiento de la página; sin él, todo sería más estático.
+            </div>
+
+            <span class="numPagina">Página 3 / 6</span>
+        </div>
+
+        <!-- PÁGINA 4 SQL -->
+        <div class="pagina contenido" id="pag4">
+            <span class="etiqueta-tema">🗄️ SQL</span>
+            <h3>¿Qué es SQL?</h3>
+            <p>SQL es el lenguaje que usamos para trabajar con <span class="resaltado">bases de datos</span>. Permite guardar, buscar, modificar y eliminar información.</p>
+
+            <div class="codigo">
+CREATE TABLE alumnos (
     id INT PRIMARY KEY,
     nombre TEXT,
-    precio REAL
+    correo TEXT
 );
 
-SELECT nombre, precio FROM productos WHERE precio &lt; 100;
-                </div>
+SELECT * FROM alumnos;
             </div>
+
+            <div class="tarjeta-dato">
+                <strong>Tip:</strong> En proyectos web, SQL se usa para guardar usuarios, productos, mensajes o registros de una tarea.
+            </div>
+
+            <span class="numPagina">Página 4 / 6</span>
         </div>
 
-        <!-- SECCIÓN JINJA + FLASK -->
-        <div class="seccion">
-            <h2>🧩 JINJA2 + FLASK</h2>
-            <p><strong>¿Qué es?</strong> Motor de plantillas para Flask, enviamos datos desde Python al HTML, ciclos y condicionales directamente en la página.</p>
-            <button class="boton" onclick="ver('jinja')">Ver ejemplo Jinja</button>
-            <div id="jinja" class="oculto">
-                <div class="codigo">
-{% for articulo in lista_articulos %}
-    &lt;p&gt; {{ articulo }} &lt;/p&gt;
+        <!-- PÁGINA 5 JINJA2 -->
+        <div class="pagina contenido" id="pag5">
+            <span class="etiqueta-tema">🧩 Jinja2</span>
+            <h3>¿Qué es Jinja2?</h3>
+            <p>Jinja2 es un motor de plantillas que permite combinar HTML con datos de Python. Se usa mucho con Flask para crear páginas dinámicas.</p>
+
+            <div class="codigo">
+&lt;ul&gt;
+{% for alumno in alumnos %}
+    &lt;li&gt;{{ alumno.nombre }}&lt;/li&gt;
 {% endfor %}
+&lt;/ul&gt;
 
 {% if usuario %}
-    &lt;p&gt;Hola {{ usuario }}&lt;/p&gt;
+    &lt;p&gt;Bienvenido {{ usuario }}&lt;/p&gt;
 {% endif %}
-                </div>
             </div>
+
+            <div class="tarjeta-dato">
+                <strong>Tip:</strong> Con Jinja2 no tienes que escribir todo el HTML a mano para cada dato que cambie.
+            </div>
+
+            <span class="numPagina">Página 5 / 6</span>
         </div>
     </div>
 
+    <div class="botones">
+        <button id="btnAtras" onclick="anterior()" disabled>⬅️ Anterior</button>
+        <button id="btnSiguiente" onclick="siguiente()">Siguiente ➡️</button>
+    </div>
+
     <script>
-        function ver(id){
-            const caja = document.getElementById(id);
-            if(caja.classList.contains("oculto")){
-                caja.classList.remove("oculto");
-            }else{
-                caja.classList.add("oculto");
+        let paginaActual = 0;
+        const totalPaginas = 6;
+
+        function mostrarPagina() {
+            for (let i = 0; i < totalPaginas; i++) {
+                document.getElementById("pag" + i).classList.remove("activa");
+            }
+            document.getElementById("pag" + paginaActual).classList.add("activa");
+
+            document.getElementById("btnAtras").disabled = paginaActual === 0;
+            document.getElementById("btnSiguiente").disabled = paginaActual === totalPaginas‑1;
+        }
+
+        function siguiente() {
+            if (paginaActual < totalPaginas‑1) {
+                paginaActual++;
+                mostrarPagina();
+            }
+        }
+
+        function anterior() {
+            if (paginaActual > 0) {
+                paginaActual‑‑;
+                mostrarPagina();
             }
         }
     </script>
 </body>
 </html>
+
