@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es‑MX">
+<head>
+    <meta charset="UTF‑8">
+    <meta name="viewport" content="width=device‑width, initial‑scale=1.0">
+    <title>Lapbook Interactivo Desarrollo Web</title>
+    <style>
+        *{box‑sizing:border‑box;font‑family:Arial, sans‑-serif;margin:0;padding:0;}
+        body{background:#FFF8E7;padding:20px;color:#222;}
+        .contenedor{max‑width:900px;margin:0 auto;background:white;padding:25px;border‑radius:16px;box‑shadow:0 4px 12px #00000022;}
+        h1{text‑align:center;color:#9B2335;margin‑bottom:30px;}
+        .seccion{margin:25px 0;padding:20px;border‑left:6px solid #9B2335;background:#fff3f4;border‑radius:8px;}
+        h2{color:#581845;margin‑bottom:12px;}
+        .codigo{background:#222;color:#7DCEA0;padding:12px;border‑radius:6px;margin:10px 0;white‑space:pre‑wrap;}
+        .boton{padding:8px 14px;background:#C70039;color:white;border:none;border‑radius:6px;margin:8px 0;cursor:pointer;}
+        .oculto{display:none;}
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>📖 LAPBOOK: FUNDAMENTOS DEL DESARROLLO WEB</h1>
+
+        <!-- SECCIÓN HTML -->
+        <div class="seccion">
+            <h2>🌐 HTML: ESTRUCTURA DE LA PÁGINA</h2>
+            <p><strong>¿Qué es?</strong> Lenguaje de marcado que construye la estructura: textos, imágenes, botones, listas.</p>
+            <button class="boton" onclick="ver('html')">Ver ejemplos de etiquetas</button>
+            <div id="html" class="oculto">
+                <div class="codigo">
+&lt;header&gt; → Encabezado superior de la página
+&lt;nav&gt; → Menú de navegación
+&lt;section&gt; → Bloque de contenido
+&lt;article&gt; → Artículo independiente
+&lt;footer&gt; → Pie de página
+                </div>
+                <p><strong>Ejemplo completo:</strong></p>
+                <div class="codigo">
+&lt;section&gt;
+    &lt;h3&gt;Noticias&lt;/h3&gt;
+    &lt;p&gt;Contenido de la noticia&lt;/p&gt;
+&lt;/section&gt;
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN CSS -->
+        <div class="seccion">
+            <h2>🎨 CSS: ESTILOS Y DISEÑO</h2>
+            <p><strong>¿Qué es?</strong> Le da apariencia: sombras, bordes redondeados, colores degradados, posicionamiento de los elementos.</p>
+            <button class="boton" onclick="ver('css')">Ver propiedades CSS</button>
+            <div id="css" class="oculto">
+                <div class="codigo">
+box‑shadow: sombra de los elementos
+border‑radius: esquinas redondeadas
+display: flex; → Acomodar elementos en fila
+background: linear‑gradient → Fondo degradado
+text‑decoration → Quitar/subrayar texto
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN JAVASCRIPT -->
+        <div class="seccion">
+            <h2>⚡ JAVASCRIPT: INTERACTIVIDAD</h2>
+            <p><strong>¿Qué es?</strong> Hace que la página reaccione: cambiar colores, contar, validar formularios, mostrar mensajes personalizados.</p>
+            <button class="boton" onclick="ver('js')">Ver funciones JS</button>
+            <div id="js" class="oculto">
+                <div class="codigo">
+// Contador
+let contador = 0
+function sumar(){
+    contador = contador + 1
+    alert("El número es: "+contador)
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN SQL -->
+        <div class="seccion">
+            <h2>🗄️ SQL: BASES DE DATOS</h2>
+            <p><strong>¿Qué es?</strong> Guardamos la información de los usuarios, productos, registros para nuestra página web.</p>
+            <button class="boton" onclick="ver('sql')">Ver comandos SQL</button>
+            <div id="sql" class="oculto">
+                <div class="codigo">
+CREATE TABLE productos(
+    id INT PRIMARY KEY,
+    nombre TEXT,
+    precio REAL
+);
+
+SELECT nombre, precio FROM productos WHERE precio &lt; 100;
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN JINJA + FLASK -->
+        <div class="seccion">
+            <h2>🧩 JINJA2 + FLASK</h2>
+            <p><strong>¿Qué es?</strong> Motor de plantillas para Flask, enviamos datos desde Python al HTML, ciclos y condicionales directamente en la página.</p>
+            <button class="boton" onclick="ver('jinja')">Ver ejemplo Jinja</button>
+            <div id="jinja" class="oculto">
+                <div class="codigo">
+{% for articulo in lista_articulos %}
+    &lt;p&gt; {{ articulo }} &lt;/p&gt;
+{% endfor %}
+
+{% if usuario %}
+    &lt;p&gt;Hola {{ usuario }}&lt;/p&gt;
+{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ver(id){
+            const caja = document.getElementById(id);
+            if(caja.classList.contains("oculto")){
+                caja.classList.remove("oculto");
+            }else{
+                caja.classList.add("oculto");
+            }
+        }
+    </script>
+</body>
+</html>
